@@ -56,11 +56,16 @@ function App() {
       .post("/add",{
         colaborador: item
       })
-      .then((response) => console.log(response.data.msg))
+      .then((response) => api
+      .get("/")
+      .then((response) => setCoffee(response.data)) //response.data.map((item)=> console.log(item.colaborador)))
+      .catch((err) => {
+        console.error("ops! ocorreu um erro" + err);
+      }))
       .catch((err) => {
         console.error("ops! ocorreu um erro" + err);
       });
-      window.location.reload()
+      
   }
 
 
@@ -72,14 +77,19 @@ function App() {
        .post("/remove",{
          colaborador: item.colaborador
        })
-       .then((response) =>   
-       console.log(response.data.msg)
+       .then((response) =>   api
+      .get("/")
+      .then((response) => setCoffee(response.data)) //response.data.map((item)=> console.log(item.colaborador)))
+      .catch((err) => {
+        console.error("ops! ocorreu um erro" + err);
+      })
         
        )
        .catch((err) => {
          console.error("ops! ocorreu um erro" + err);
        });
-       window.location.reload()
+       
+       
    }
 
 
