@@ -5,7 +5,8 @@ import axios from "axios";
 
 
 const api = axios.create({
-  baseURL: "https://acesse-cafe-back.herokuapp.com/",
+  //baseURL: "https://acesse-cafe-back.herokuapp.com/",
+  baseURL: "http://localhost:3001"
 });
 
 function App() {
@@ -14,7 +15,6 @@ function App() {
 "AUREA",
 "DORIS",
 "EDUARDO",
-"EZEQUIEL",
 "ERLIEI",
 "GEDSON ",
 "GLEYCYKELLY",
@@ -22,7 +22,7 @@ function App() {
 "IGOR",
 "JHONNATAN",
 "JOICE",
-"LAYL",
+"LAYLA",
 "LORENA",
 "LUCAS MATOS",
 "LUCAS MOREIRA ",
@@ -49,6 +49,7 @@ function App() {
       });
   }, []);
  const [coffee, setCoffee] = useState([])
+ const [msg, setMsg] = useState("")
 
   function addCoffee(item){
   
@@ -56,12 +57,32 @@ function App() {
       .post("/add",{
         colaborador: item
       })
-      .then((response) => api
+      .then((response1) => {
+       setMsg(response1.data.msg)
+       if (response1.data.st == 0){
+        document.getElementById('alert').classList.add("danger")
+        document.getElementById('alert').classList.remove("none")
+        setTimeout(() => {
+         document.getElementById('alert').classList.add("none")
+        document.getElementById('alert').classList.remove("danger")
+        }, 3000);
+       }else{
+       
+       document.getElementById('alert').classList.add("succes")
+       document.getElementById('alert').classList.remove("none")
+       setTimeout(() => {
+        document.getElementById('alert').classList.add("none")
+       document.getElementById('alert').classList.remove("succes")
+       }, 3000);
+      }
+        api
       .get("/")
       .then((response) => setCoffee(response.data)) //response.data.map((item)=> console.log(item.colaborador)))
       .catch((err) => {
         console.error("ops! ocorreu um erro" + err);
-      }))
+      })
+    }
+      )
       .catch((err) => {
         console.error("ops! ocorreu um erro" + err);
       });
@@ -101,7 +122,7 @@ function App() {
       <h1>Acesse  café <img width="25px" src="./coffee.png" /></h1>
       </header>
 
-      <div id="alert"></div>
+      <div id="alert" className='none'>{msg}</div>
       <div className="list-coffee">
         <h1>colaboradores</h1>
         <ul>
