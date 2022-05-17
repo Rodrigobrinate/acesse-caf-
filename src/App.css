@@ -97,3 +97,7 @@ margin-left: 40px;
   0% {opacity: 1;}
   100% {opacity: 0;}
 }
+
+.progress {
+  width: 50%;
+}
