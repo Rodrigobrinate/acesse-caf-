@@ -5,8 +5,8 @@ import axios from "axios";
 
 
 const api = axios.create({
-  //baseURL: "https://acesse-cafe-back.herokuapp.com/",
-  baseURL: "http://localhost:3001"
+  baseURL: "https://acesse-cafe-back.herokuapp.com/",
+  //baseURL: "http://localhost:3001"
 });
 
 function App() {
