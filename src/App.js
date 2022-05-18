@@ -69,15 +69,26 @@ function App() {
  
 
 
-  function removecoffee(item){
+  function removecoffee(item, minutos){
   
     api
        .post("/remove",{
-         colaborador: item.colaborador
+         colaborador: item
        })
        .then((response) =>   api
       .get("/")
-      .then((response) => setCoffee(response.data)) //response.data.map((item)=> console.log(item.colaborador)))
+      .then((response) => { setCoffee(response.data)
+      api
+      .post("/add-historic",{
+        colaborador: item,
+        minutos: minutos,
+
+      })
+      .then((response1) => {
+
+
+      })}
+      ) //response.data.map((item)=> console.log(item.colaborador)))
       .catch((err) => {
         console.error("ops! ocorreu um erro" + err);
       })
@@ -88,8 +99,10 @@ function App() {
        });
        
        
+       
    }
-   
+
+  
 
 
   console.log(localStorage.getItem('coffee'))
@@ -112,7 +125,7 @@ function App() {
       <div className="list-coffee">
         <h1>colaboradores no café</h1>
         <ul>
-        { coffee.map( (item) => <li>{ item.colaborador }<ProgressBar now={ (((new Date().getTime() - new Date(item.data).getTime()) * 100)/600000).toFixed(0) /*((((new Date().getTime() - new Date(item.data).getTime())/1000)/60)/60).toFixed(0)+":"+Math.floor((((new Date().getTime() - new Date(item.data).getTime())/1000)/60).toFixed(0)%60)+":"+ Math.floor((((new Date().getTime() - new Date(item.data).getTime())/1000)%60)) */}/><img onClick={() => {removecoffee(item)}}  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAP9JREFUSEvFlesRATEURs9WQAeogBLogA6oQAnoQAd0QAeUQAd0oAPmM7kzkdllkuyu/NtJcs59ZJOChkfRMJ9WBWNgB/Qzs7oBC+Asjp+BJnqZcNsu1iAUPGuCG+YdvJ9Ba4LcxluglRn8RbAGtsDDFbgLLIFNSd+iMxB8BVyAiQOegJETaN4f0QJFqzM9dBLBBL8C+ncsK5NEC7TRl+i7Cq65ZIGVRRArVxh9kkDRG1yRa1i51JPsEk2Bg1cWCawnM+CY22Ttl0RQ/5iqwSE8qUSxV1RSk2MklQKl34khfVl7t3fFv3dU030Nb4Lg87IHp6bgPzG5N+fPoBoXvADVUUAZPLLH/wAAAABJRU5ErkJggg=="/></li>) }
+        { coffee.map( (item) => <li>{ item.colaborador }<ProgressBar now={ (((new Date().getTime() - new Date(item.data).getTime()) * 100)/600000).toFixed(0) /*((((new Date().getTime() - new Date(item.data).getTime())/1000)/60)/60).toFixed(0)+":"+Math.floor((((new Date().getTime() - new Date(item.data).getTime())/1000)/60).toFixed(0)%60)+":"+ Math.floor((((new Date().getTime() - new Date(item.data).getTime())/1000)%60)) */}/><img onClick={() => {removecoffee(item.colaborador, (new Date().getTime() - new Date(item.data).getTime()))}}  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAP9JREFUSEvFlesRATEURs9WQAeogBLogA6oQAnoQAd0QAeUQAd0oAPmM7kzkdllkuyu/NtJcs59ZJOChkfRMJ9WBWNgB/Qzs7oBC+Asjp+BJnqZcNsu1iAUPGuCG+YdvJ9Ba4LcxluglRn8RbAGtsDDFbgLLIFNSd+iMxB8BVyAiQOegJETaN4f0QJFqzM9dBLBBL8C+ncsK5NEC7TRl+i7Cq65ZIGVRRArVxh9kkDRG1yRa1i51JPsEk2Bg1cWCawnM+CY22Ttl0RQ/5iqwSE8qUSxV1RSk2MklQKl34khfVl7t3fFv3dU030Nb4Lg87IHp6bgPzG5N+fPoBoXvADVUUAZPLLH/wAAAABJRU5ErkJggg=="/></li>) }
         </ul>
       </div>
    

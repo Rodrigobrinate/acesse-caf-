@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom/client";
 import  App from './App'
-import Login from "./pages/Login";
+import Historic from "./pages/Historic";
 import {
   BrowserRouter,
   Routes,
@@ -15,7 +15,7 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}></Route>
-      <Route path="/login" element={<Login />}></Route>
+      <Route path="/historic" element={<Historic />}></Route>
     </Routes>
   </BrowserRouter>
 );
