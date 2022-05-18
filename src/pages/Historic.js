@@ -31,7 +31,7 @@ const [msg, setMsg] = useState("")
     
 
     <div className="list-coffee">
-      <h1>colaboradores no café</h1>
+      <h1>Colaboradores no café hoje</h1>
       <ul>
       { coffee.map( (item) => <li>{ item.colaborador }<span>{(((item.minutos )/1000)/60).toFixed(0) /*((((new Date().getTime() - new Date(item.data).getTime())/1000)/60)/60).toFixed(0)+":"+Math.floor((((new Date().getTime() - new Date(item.data).getTime())/1000)/60).toFixed(0)%60)+":"+ Math.floor((((new Date().getTime() - new Date(item.data).getTime())/1000)%60)) */}</span></li>) }
       </ul>
